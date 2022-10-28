@@ -1,4 +1,3 @@
-@echo off
 :: 先打开浏览器
 start "" "C:\Program Files\Google\Chrome\Application\chrome.exe" & ping localhost -n 1
 :: 接着打开QQ
@@ -24,8 +23,8 @@ start "" "D:\bn_software\air\Q-Dir\Q-Dir.exe"  & ping localhost -n 1
 :: 录屏也加上
 start "" "C:\Program Files (x86)\EVCapture\EVCapture.exe"  & ping localhost -n 1
 :: 截图的小玩意
-start "" D:\bn_software\chop\Setuna.exe"  & ping localhost -n 1
+start "" "D:\bn_software\chop\Setuna.exe"  & ping localhost -n 1
 
-taskkill /if /im cmd.exe
+taskkill /f /im cmd.exe
 exit
 
