@@ -14,3 +14,7 @@ pause
 ----------
 
 至于执行的话，为了偷懒我这里就不另外写脚本了，直接调用window的每日定时任务去触发我做的这个rex_move即可
+具体的做法如下
+cmd里面创建一条命令：
+schtasks /create /tn rexmove /tr E:\code\air\demo\Airtest_Run\Bat\rexmove_4\rex_move.bat /sc /DAILY /st 12:00
+planB:从控制面板-管理工具-任务计划程序，图形化！
