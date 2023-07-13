@@ -1,3 +1,4 @@
+import base64
 from locust import HttpUser, task, between
 
 class MyUser(HttpUser):
@@ -17,9 +18,16 @@ class MyUser(HttpUser):
         response = self.client.post("/login", data=credentials)
         if response.status_code == 200:
             print("登录成功")
+        elif response.status_code ==401:
+            print("其实是401")
         else:
             print("登录失败")
 
+
     @task
     def index(self):
-        self.client.get("/")
+        auth_header = "Basic " + base64.b64encode(f"{self.USERNAME}:{self.PASSWORD}".encode()).decode()
+        response = self.client.get("/", headers={"Authorization": auth_header})
+        print(response.status_code)
+        print(response.content)
+        #加了个登录成功之后保存信息，这样后续登录就不会返回401了
