@@ -10,7 +10,7 @@ from loguru import logger
  
  
 @events.test_start.add_listener
-def on_test_start(environment, **kwargs):
+def on_test_start(environment, **kwargs):   #这里的**kw是通配的关键字，可以止在以后的版本中添加新参数时导致监听器代码不可用
     if not isinstance(environment.runner, MasterRunner):
         print("Beginning test setup")
     else:
@@ -25,8 +25,8 @@ def on_test_stop(environment, **kwargs):
         print("Stopped test from Master node")
  
  
-# 请求完成后，触发监听器：定义了输出响应的相关内容，这个可以放到locufile文件里面
 @events.request.add_listener
+# 请求完成后，触发监听器：定义了输出响应的相关内容，这个可以放到locufile文件里面
 def my_request_handler(request_type, name, response_time, response_length, response,
                        context, exception, start_time, url, **kwargs):
     if exception:
@@ -105,7 +105,7 @@ class User1(HttpUser):
  
     def on_stop(self):
         """
-        每个user运行结束后调用on_start方法
+        每个user运行结束后调用on_stop方法
         清理测试数据等：
         （1）调用接口清理测试数据、（2）数据库清理测试数据
         """
