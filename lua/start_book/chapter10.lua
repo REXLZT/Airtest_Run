@@ -18,3 +18,22 @@ print(op)
 -- end
 
 --`setmetatable` 将 `_M` 作为新建表的原型，所以在自己的表内找不到所调用方法和变量的时候，便会到 `__index` 所指定的 `_M` 类型中去寻找。
+
+
+--下面尝试解释下self对象的意义
+-------------------------------------
+---Sample A
+print("SELF sample")
+local tA = {a = 1, b = 2}
+function tA.Add(self)
+    return (self.a + self.b)
+end
+print(tA.Add(tA))
+
+-------------------------------------
+---Sample B
+local tB = {a = 1, b = 2}
+function tB:Add()
+    return (self.a + self.b)
+end
+print(tB:Add())
