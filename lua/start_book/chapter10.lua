@@ -21,19 +21,34 @@ print(op)
 
 
 --下面尝试解释下self对象的意义
+-- 对于self的解释：表拥有一个标识：self。self类似于this指针，大多数面向对象语言都隐藏了这个机制，在编码时不需要显示的声明这个参数，就可以在方法内使用this（例如C++和C#）。
+-- 在lua中，提供了冒号操作符来隐藏这个参数
+-- 1、对于方法定义来说，会增加一个额外的隐藏形参（self）；
+
+-- 2、对于方法调用来说，会增加一个额外的实参（表自身）
 -------------------------------------
 ---Sample A
-print("SELF sample")
-local tA = {a = 1, b = 2}
-function tA.Add(self)
-    return (self.a + self.b)
+print("***slef****")
+local t = {a = 2 , b = 1,c = 10}
+--使用:自定义函数
+function t:add()
+    
+    local m=self.a*self.b
+    
+    local n=self.a+self.b
+    self.a=self.c+self.a
+    local v=n+m
+  return v
 end
-print(tA.Add(tA))
-
--------------------------------------
----Sample B
-local tB = {a = 1, b = 2}
-function tB:Add()
-    return (self.a + self.b)
+--使用.自定义函数
+function t.sub(parT)
+  return parT.a - parT.b
 end
-print(tB:Add())
+--通过:调用，会隐式将self传入进去
+print(t:add())
+--通过.来调用，则必须传入参数，否则报nil错误
+print(t.add(t))
+--通过.来调用，则必须传入参数，否则报nil错误
+print(t.sub(t))
+--通过:来调用，则会隐藏将self传入
+print(t:sub())
