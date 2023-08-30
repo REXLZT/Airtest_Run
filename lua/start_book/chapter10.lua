@@ -29,15 +29,17 @@ print(op)
 -------------------------------------
 ---Sample A
 print("***slef****")
-local t = {a = 2 , b = 1,c = 10}
+local t = {a = 2 , b = 2,c = 2}
 --使用:自定义函数
 function t:add()
     
     local m=self.a*self.b
     
     local n=self.a+self.b
+    
     self.a=self.c+self.a
     local v=n+m
+
   return v
 end
 --使用.自定义函数
